@@ -1,0 +1,63 @@
+<style>
+    .custom-select {
+      position: relative;
+      display: inline-block;
+    }
+  
+    .select-selected {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      padding: 10px;
+    }
+  
+    .select-items {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      width: 100%;
+      z-index: 99;
+    }
+  
+    .select-items div {
+      padding: 10px;
+      cursor: pointer;
+    }
+  
+    .select-items div:hover {
+      background-color: #ddd;
+    }
+  
+    .select-items {
+      max-height: 150px; /* Adjust the max height as needed */
+      overflow-y: auto;
+    }
+  </style>
+  
+  <div class="custom-select">
+    <div class="select-selected">Option 1</div>
+    <div class="select-items">
+      <div>Option 1</div>
+      <div>Option 2</div>
+      <div>Option 3</div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('click', function(e) {
+      var select = document.querySelector('.custom-select');
+      var selected = select.querySelector('.select-selected');
+      var items = select.querySelector('.select-items');
+  
+      if (e.target === selected) {
+        items.style.display = items.style.display === 'block' ? 'none' : 'block';
+      } else if (!select.contains(e.target)) {
+        items.style.display = 'none';
+      } else if (e.target.parentNode.classList.contains('select-items')) {
+        selected.textContent = e.target.textContent;
+        items.style.display = 'none';
+      }
+    });
+  </script>
+  
